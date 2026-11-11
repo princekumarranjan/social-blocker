@@ -1,0 +1,9 @@
+{
+  "[sql]": {
+    "editor.formatOnSave": false
+  },
+  "files.associations": {
+    "*.sql": "sql",
+    "*.html": "html"
+  }
+}

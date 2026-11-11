@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Wapas – the meme that catches you mid-scroll</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f5ff;
+      --ink: #14173a;
+      --muted: #4d5180;
+      --card: #fff;
+      --line: #d3d6f7;
+      --blue: #2331ff;
+      --pink: #ff3d81;
+      --sun: #ffd23f;
+      --display: 'Bricolage Grotesque', system-ui, sans-serif;
+      --body: 'Figtree', system-ui, sans-serif;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0e1027;
+        --ink: #eef0ff;
+        --muted: #a3a8e0;
+        --card: #181b3f;
+        --line: #2e3379
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0e1027;
+      --ink: #eef0ff;
+      --muted: #a3a8e0;
+      --card: #181b3f;
+      --line: #2e3379
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 400 1.0625rem/1.6 var(--body)
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--display);
+      margin: 0;
+      line-height: 1
+    }
+
+    p {
+      margin: 0
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 22px
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--sun);
+      outline-offset: 3px
+    }
+
+    .btn {
+      display: inline-block;
+      border: 0;
+      border-radius: 999px;
+      padding: 15px 28px;
+      font: 600 1.05rem var(--body);
+      cursor: pointer;
+      text-decoration: none;
+      background: var(--sun);
+      color: #14173a;
+      transition: transform .15s
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) rotate(-1deg)
+    }
+
+    .btn:disabled {
+      opacity: .6;
+      cursor: wait
+    }
+
+    /* hero */
+    .hero {
+      background: var(--blue);
+      color: #fff;
+      padding-bottom: 88px;
+      overflow: hidden
+    }
+
+    .hero nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      font: 800 1.5rem var(--display);
+      letter-spacing: -.02em
+    }
+
+    .hero nav a {
+      font: 600 .95rem var(--body);
+      color: #fff
+    }
+
+    .hero .grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 40px;
+      align-items: center;
+      padding-top: 28px
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8.4vw, 6.4rem);
+      font-weight: 800;
+      letter-spacing: -.045em
+    }
+
+    h1 em {
+      font-style: normal;
+      display: inline-block;
+      background: var(--sun);
+      color: #14173a;
+      padding: 0 .14em;
+      transform: rotate(-2.5deg);
+      border-radius: .12em
+    }
+
+    .lead {
+      margin: 26px 0 32px;
+      max-width: 44ch;
+      font-size: 1.25rem;
+      color: #dfe2ff
+    }
+
+    .stat {
+      margin-top: 22px;
+      font-size: .95rem;
+      color: #c3c8ff
+    }
+
+    /* phone */
+    .stage {
+      display: grid;
+      justify-items: center;
+      gap: 16px
+    }
+
+    .phone {
+      position: relative;
+      width: min(310px, 100%);
+      aspect-ratio: 9/17.5;
+      border: 11px solid #0a0c24;
+      border-radius: 42px;
+      background: #0a0c24;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(5, 8, 70, .55);
+      transform: rotate(3deg)
+    }
+
+    .phone.shake {
+      animation: shake .5s
+    }
+
+    @keyframes shake {
+      20% {
+        transform: rotate(-1deg) translateX(-8px)
+      }
+
+      40% {
+        transform: rotate(6deg) translateX(8px)
+      }
+
+      60% {
+        transform: rotate(1deg) translateX(-5px)
+      }
+    }
+
+    .reel {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 22px 18px 74px;
+      color: #fff;
+      font: 800 1.5rem/1.05 var(--display);
+      letter-spacing: -.02em;
+      animation: up .28s ease-out
+    }
+
+    @keyframes up {
+      from {
+        transform: translateY(40px);
+        opacity: .2
+      }
+    }
+
+    .reel small {
+      font: 600 .85rem var(--body);
+      opacity: .85;
+      margin-bottom: 8px
+    }
+
+    .bar {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 18px;
+      display: grid;
+      gap: 8px
+    }
+
+    .ticks {
+      display: flex;
+      gap: 3px
+    }
+
+    .ticks i {
+      flex: 1;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, .28)
+    }
+
+    .ticks i.on {
+      background: #fff
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      font: 600 .85rem var(--body);
+      color: #fff
+    }
+
+    .nudge {
+      position: absolute;
+      inset: 0;
+      background: var(--sun);
+      color: #14173a;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+      padding: 24px;
+      text-align: center
+    }
+
+    .nudge.on {
+      display: flex;
+      animation: slam .4s cubic-bezier(.2, 1.5, .4, 1)
+    }
+
+    @keyframes slam {
+      from {
+        transform: scale(2.2) rotate(-8deg);
+        opacity: 0
+      }
+    }
+
+    .nudge .meme {
+      font: 800 2.2rem/1 var(--display);
+      letter-spacing: -.03em
+    }
+
+    .nudge small {
+      font-size: .95rem
+    }
+
+    .nudge button {
+      align-self: center;
+      background: #14173a;
+      color: #fff;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font: 600 1rem var(--body);
+      cursor: pointer
+    }
+
+    .ctrl {
+      font-size: .9rem;
+      color: #c3c8ff
+    }
+
+    .ctrl button {
+      background: none;
+      border: 2px solid #fff6;
+      color: #fff;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font: 600 .9rem var(--body);
+      cursor: pointer;
+      margin-right: 8px
+    }
+
+    /* how */
+    .how {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 80px 0 40px
+    }
+
+    .how div {
+      padding: 26px;
+      border-radius: 26px;
+      background: var(--card);
+      border: 2px solid var(--line)
+    }
+
+    .how div:nth-child(2) {
+      transform: translateY(22px)
+    }
+
+    .how h3 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+      letter-spacing: -.02em
+    }
+
+    .how p {
+      color: var(--muted)
+    }
+
+    /* form */
+    .join {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 48px;
+      padding: 70px 0 90px
+    }
+
+    .join h2 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      letter-spacing: -.04em;
+      margin-bottom: 16px
+    }
+
+    .join .sub {
+      color: var(--muted);
+      max-width: 36ch
+    }
+
+    .cost {
+      margin-top: 28px;
+      padding: 22px;
+      border-radius: 22px;
+      background: var(--ink);
+      color: var(--bg)
+    }
+
+    .cost b {
+      display: block;
+      font: 800 3rem/1 var(--display);
+      letter-spacing: -.04em;
+      color: var(--sun)
+    }
+
+    .cost span {
+      font-size: .95rem
+    }
+
+    form,
+    .done {
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: 30px;
+      padding: 34px;
+      display: grid;
+      gap: 18px
+    }
+
+    label,
+    legend {
+      font-weight: 600;
+      font-size: .95rem
+    }
+
+    input[type=text],
+    input[type=number],
+    select {
+      width: 100%;
+      margin-top: 6px;
+      padding: 13px 14px;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      background: var(--bg);
+      color: var(--ink);
+      font: 400 1rem var(--body)
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--blue);
+      outline: none
+    }
+
+    fieldset {
+      border: 0;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    .slide {
+      display: grid;
+      grid-template-columns: 96px 1fr 64px;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600
+    }
+
+    .slide output {
+      text-align: right;
+      font: 800 1.1rem var(--display)
+    }
+
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--blue);
+      height: 28px
+    }
+
+    .hp {
+      position: absolute;
+      left: -9999px
+    }
+
+    .check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-weight: 400
+    }
+
+    .check input {
+      margin-top: 5px;
+      accent-color: var(--blue)
+    }
+
+    #status {
+      min-height: 1.5em;
+      font-weight: 600
+    }
+
+    #status.err {
+      color: var(--pink)
+    }
+
+    #status.ok {
+      color: #14a06f
+    }
+
+    .submit {
+      background: var(--blue);
+      color: #fff
+    }
+
+    [hidden] {
+      display: none !important
+    }
+
+    .banner {
+      margin: 0;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--sun);
+      color: #14173a;
+      font-size: .9rem;
+      font-weight: 600
+    }
+
+    .done {
+      display: none;
+      text-align: center;
+      justify-items: center;
+      padding: 50px 30px
+    }
+
+    .done h3 {
+      font-size: 2.2rem;
+      letter-spacing: -.03em
+    }
+
+    footer {
+      padding: 0 0 44px;
+      color: var(--muted);
+      font-size: .9rem
+    }
+
+    @media (max-width:860px) {
+
+      .hero .grid,
+      .join,
+      .how {
+        grid-template-columns: 1fr
+      }
+
+      .how div:nth-child(2) {
+        transform: none
+      }
+
+      .phone {
+        transform: none
+      }
+
+      form {
+        padding: 24px
+      }
+
+      .row {
+        grid-template-columns: 1fr
+      }
+
+      .slide {
+        grid-template-columns: 80px 1fr 54px
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <nav><span>Wapas</span><a href="#join">Join early list</a></nav>
+      <div class="grid">
+        <div>
+          <h1>Caught mid-scroll by a <em>meme.</em></h1>
+          <p class="lead">Wapas counts your reels. When you cross your limit, a full-screen meme covers your phone and
+            sends you back to the work you forgot.</p>
+          <a class="btn" href="#join">Set my scroll limit</a>
+          <p class="stat">This phone is a live demo. Watch it catch someone.</p>
+        </div>
+        <div class="stage">
+          <div class="phone" id="phone" aria-label="Live demo of a phone being interrupted by a meme">
+            <div class="reel" id="reel" style="background:#5b6bff"></div>
+            <div class="bar">
+              <div class="ticks" id="ticks"></div>
+              <div class="meta"><span id="count">0 reels</span><span id="left"></span></div>
+            </div>
+            <div class="nudge" id="nudge" role="alertdialog" aria-labelledby="meme">
+              <div class="meme" id="meme"></div><small id="memeSub"></small>
+              <button id="back" type="button">Okay, back to work</button>
+            </div>
+          </div>
+          <div class="ctrl"><button id="scroll" type="button">Scroll a reel</button><span id="note">Skip a meme and the
+              next one comes sooner.</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="how">
+      <div>
+        <h3>You choose the limit</h3>
+        <p>Decide how many reels you allow yourself, and how many minutes each app gets in a day.</p>
+      </div>
+      <div>
+        <h3>Wapas keeps count</h3>
+        <p>Reels and app time are counted on your phone. Your answers are never shown publicly.</p>
+      </div>
+      <div>
+        <h3>A meme interrupts you</h3>
+        <p>A random meme covers the screen. Ignore it, and the next one arrives after fewer reels.</p>
+      </div>
+    </section>
+
+    <section class="join" id="join">
+      <div>
+        <h2>Set your goal</h2>
+        <p class="sub">Tell us who you are and how much scrolling is okay. Move the sliders to see what your habit
+          costs.</p>
+        <div class="cost"><b id="years">0 days</b><span>of every year spent on social apps at your current
+            limits.</span></div>
+      </div>
+      <div>
+        <form id="form" novalidate autocomplete="off">
+          <p class="banner" id="banner" hidden>Preview mode: this page isn’t connected to Supabase yet, so answers are
+            not saved.</p>
+          <label>Your name<input type="text" name="name" maxlength="60" required></label>
+          <div class="row">
+            <label>Profession
+              <select name="profession" required>
+                <option value="">Choose one</option>
+                <option value="school_student">School student</option>
+                <option value="college_student">College student</option>
+                <option value="working_professional">Working professional</option>
+                <option value="freelancer">Freelancer</option>
+                <option value="other">Other</option>
+              </select></label>
+            <label>Age<input type="number" name="age" min="8" max="100" inputmode="numeric" required></label>
+          </div>
+          <label>Nudge me after this many reels<input type="number" name="reel_nudge_every" min="3" max="50" value="10"
+              inputmode="numeric" required></label>
+          <fieldset>
+            <legend>Daily minutes allowed per app</legend>
+            <label class="slide">Instagram<input type="range" name="instagram_min" min="0" max="240" step="5"
+                value="45"><output>45m</output></label>
+            <label class="slide">YouTube<input type="range" name="youtube_min" min="0" max="240" step="5"
+                value="45"><output>45m</output></label>
+            <label class="slide">Snapchat<input type="range" name="snapchat_min" min="0" max="240" step="5"
+                value="20"><output>20m</output></label>
+            <label class="slide">Other apps<input type="range" name="other_min" min="0" max="240" step="5"
+                value="20"><output>20m</output></label>
+          </fieldset>
+          <input class="hp" type="text" name="company_site" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label class="check"><input type="checkbox" name="consent" required> I agree that Wapas can store these
+            answers to set up my nudges.</label>
+          <button class="btn submit" type="submit" id="submit">Join the early list</button>
+          <p id="status" role="status" aria-live="polite"></p>
+        </form>
+        <div class="done" id="done">
+          <h3 id="doneT"></h3>
+          <p id="doneP"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div class="wrap">
+    <footer>Wapas is an early idea. Answers are stored securely and are not shown publicly.</footer>
+  </div>
+
+  <script>
+    /* ===== CONFIG (works when you host this file yourself) ===== */
+    const SUPABASE_URL = "https://cbfgrvagzlxekszhjkrg.supabase.co";
+    const SUPABASE_ANON_KEY = ""; // anon PUBLIC key from Project Settings > API. Never the service_role key.
+
+    const $ = id => document.getElementById(id);
+    const MEMES = [["Kyu ni ho rhi padhai?", "Phone rakh. Das minute kaam pehle."], ["Reel khatam, kaam shuru.", "The next reel can wait."], ["Beta, scroll baad mein.", "Your homework won’t finish itself."], ["Wapas aaja.", "You were in the middle of something."], ["Padhai kaun karega?", "Not the algorithm."]];
+    const REELS = [["Cat vs. cucumber", "#5b6bff"], ["Soap cutting, 1 hour loop", "#e0356f"], ["Street food tour", "#12a58a"], ["Last-over six", "#f08a1c"], ["Gym transformation", "#8a3dff"], ["Room tour, 8 sqm", "#1c9be0"], ["Chai in the rain", "#c4462a"]];
+    let limit = 10, n = 0, since = 0, timer = null, paused = false, vis = true;
+    new IntersectionObserver(e => { vis = e[0].isIntersecting; }).observe($("phone"));
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && $("nudge").classList.contains("on")) $("back").click(); });
+
+    function draw() {
+      const t = $("ticks"); t.innerHTML = "";
+      for (let i = 0; i < limit; i++) { const e = document.createElement("i"); if (i < since) e.className = "on"; t.appendChild(e); }
+      $("count").textContent = n + (n === 1 ? " reel" : " reels");
+      $("left").textContent = (limit - since) + " until a nudge";
+    }
+    function step() {
+      if (paused) return;
+      n++; since++;
+      const r = REELS[n % REELS.length], el = $("reel");
+      el.style.background = "linear-gradient(165deg," + r[1] + ",#0a0c24)";
+      el.innerHTML = "<small>@reels.daily</small>" + r[0]; el.style.animation = "none"; void el.offsetWidth; el.style.animation = "";
+      if (since >= limit) { fire(); } draw();
+    }
+    function fire() {
+      paused = true; const m = MEMES[Math.floor(Math.random() * MEMES.length)];
+      $("meme").textContent = m[0]; $("memeSub").textContent = m[1];
+      $("nudge").classList.add("on"); $("phone").classList.add("shake");
+      setTimeout(() => $("phone").classList.remove("shake"), 600); $("back").focus({ preventScroll: true });
+    }
+    $("back").onclick = () => { $("nudge").classList.remove("on"); since = 0; limit = Math.max(4, limit - 2); paused = false; draw(); };
+    $("scroll").onclick = step;
+    step(); n = 0; since = 0; draw();
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTimeout(() => { timer = setInterval(() => { if (vis) step(); }, 850); }, 600);
+      $("note").textContent = "Skip a meme and the next one comes sooner (10, then 8, then 6).";
+    }
+
+    /* cost calculator */
+    const rs = [...document.querySelectorAll("input[type=range]")];
+    function cost() {
+      let tot = 0; rs.forEach(r => { r.nextElementSibling.textContent = r.value + "m"; tot += +r.value; });
+      const days = tot * 365 / 60 / 24; $("years").textContent = (days >= 10 ? Math.round(days) : days.toFixed(1)) + " days";
+    }
+    rs.forEach(r => r.addEventListener("input", cost)); cost();
+
+    /* sign-up */
+    const form = $("form"), st = $("status"), btn = $("submit");
+    const say = (t, c) => { st.textContent = t; st.className = c || ""; };
+    const finish = (name, msg) => { form.style.display = "none"; $("doneT").textContent = "Welcome, " + name + "."; $("doneP").textContent = msg; $("done").style.display = "grid"; };
+    if (!SUPABASE_ANON_KEY) $("banner").hidden = false;
+    const int = v => Number.parseInt(v, 10), ok = (v, a, b) => Number.isInteger(v) && v >= a && v <= b;
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const f = new FormData(form);
+      if (f.get("company_site")) return; // honeypot
+      const b = {
+        name: String(f.get("name")).trim(), profession: f.get("profession"), age: int(f.get("age")), reel_nudge_every: int(f.get("reel_nudge_every")),
+        instagram_min: int(f.get("instagram_min")), youtube_min: int(f.get("youtube_min")), snapchat_min: int(f.get("snapchat_min")), other_min: int(f.get("other_min"))
+      };
+      if (!b.name || b.name.length > 60) return say("Enter your name (up to 60 characters).", "err");
+      if (!b.profession) return say("Choose your profession.", "err");
+      if (!ok(b.age, 8, 100)) return say("Enter an age between 8 and 100.", "err");
+      if (!ok(b.reel_nudge_every, 3, 50)) return say("Reel limit must be between 3 and 50.", "err");
+      if (!f.get("consent")) return say("Tick the agreement box to continue.", "err");
+      if (!SUPABASE_ANON_KEY) { finish(b.name, "Preview only: nothing was saved, because no Supabase key is set yet."); return; }
+      btn.disabled = true; say("Saving…");
+      try {
+        const r = await fetch(SUPABASE_URL + "/rest/v1/signups", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY, Prefer: "return=minimal" }, body: JSON.stringify(b)
+        });
+        if (!r.ok) throw new Error(r.status);
+        finish(b.name, "You’re on the early list. We’ll message you when Wapas is ready.");
+      } catch (_) { say("Couldn’t save your answers. Check your connection and try again.", "err"); }
+      finally { btn.disabled = false; }
+    });
+  </script>
+</body>
+
+</html>
