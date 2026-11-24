@@ -1,221 +1,1116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="google-adsense-account" content="ca-pub-2162864292711601">
-<title>Wapas – the meme that catches you mid-scroll</title>
-<meta name="description" content="Wapas counts your reels and shorts, then covers the screen with a meme when you pass your limit. Free browser extension.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Sans:wght@400;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#10122e;--blue:#2331ff;--sun:#ffd23f;--paper:#fff9ea;--pink:#ff4d8d;--mute:#51557f;--line:#10122e;
---d:'Syne',system-ui,sans-serif;--b:'Instrument Sans',system-ui,sans-serif;--s:'Instrument Serif',Georgia,serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 1.05rem/1.6 var(--b)}
-h1,h2,h3{font-family:var(--d);margin:0;line-height:.98;letter-spacing:-.035em}p{margin:0}a{color:inherit}
-i.s{font:italic 400 1.08em var(--s);letter-spacing:0}
-.w{max-width:1120px;margin:0 auto;padding:0 22px}section{padding:96px 0}
-:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
-.btn{display:inline-block;border:2px solid var(--line);border-radius:999px;padding:14px 26px;font:600 1rem var(--b);background:var(--sun);color:var(--ink);text-decoration:none;cursor:pointer;box-shadow:4px 4px 0 var(--line);transition:.15s}
-.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--line)}.btn.alt{background:#fff}.btn.blue{background:var(--blue);color:#fff}.btn:disabled{opacity:.55;cursor:wait}
-.tag{font:600 .8rem var(--b);letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;display:block}
-h2{font-size:clamp(2.2rem,5.4vw,4rem);margin-bottom:18px}.lead{color:var(--mute);max-width:52ch;font-size:1.15rem}
-/* nav + hero */
-nav{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:2px solid var(--line)}
-nav .w{display:flex;align-items:center;gap:26px;height:64px}nav b{font:800 1.5rem var(--d);letter-spacing:-.04em;margin-right:auto}
-nav a{text-decoration:none;font-weight:600;font-size:.95rem}nav a.btn{padding:9px 18px;box-shadow:3px 3px 0 var(--line)}
-.hero{background:var(--blue);color:#fff;border-bottom:2px solid var(--line);padding:70px 0 90px;overflow:hidden}
-.hero .w{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
-.hero h1{font-size:clamp(3.2rem,9vw,7rem)}.hero h1 i.s{color:var(--sun)}
-.hero .lead{color:#dfe2ff;margin:24px 0 30px}.cta{display:flex;gap:14px;flex-wrap:wrap}
-.stack{position:relative;height:420px}
-.rc{position:absolute;inset:20px 40px 0 0;border:3px solid var(--line);border-radius:30px;background:linear-gradient(165deg,#ff4d8d,#3b1b8f);padding:22px;display:flex;flex-direction:column;justify-content:flex-end;font:800 1.6rem/1.05 var(--d);transform:rotate(-4deg);box-shadow:8px 8px 0 var(--line)}
-.rc small{font:600 .85rem var(--b);opacity:.85}.rc span{position:absolute;top:18px;right:18px;background:#fff;color:var(--ink);border-radius:99px;padding:4px 12px;font:600 .85rem var(--b)}
-.mc{position:absolute;inset:90px 0 40px 70px;background:var(--sun);color:var(--ink);border:3px solid var(--line);border-radius:26px;padding:22px;display:flex;flex-direction:column;justify-content:center;gap:10px;font:800 2.1rem/1 var(--d);box-shadow:8px 8px 0 var(--line);opacity:0;animation:slam 6s infinite}
-.mc small{font:600 .95rem var(--b)}
-@keyframes slam{0%,38%{opacity:0;transform:scale(2.2) rotate(-12deg)}46%{opacity:1;transform:scale(.96) rotate(3deg)}50%,90%{opacity:1;transform:scale(1) rotate(3deg)}100%{opacity:0;transform:scale(1) rotate(3deg)}}
-.mq{background:var(--sun);border-bottom:2px solid var(--line);overflow:hidden;white-space:nowrap;padding:14px 0;font:800 1.3rem var(--d)}
-.mq div{display:inline-block;animation:mq 28s linear infinite}@keyframes mq{to{transform:translateX(-50%)}}
-/* features */
-.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px}
-.f{border:2px solid var(--line);border-radius:24px;padding:26px;background:#fff;box-shadow:5px 5px 0 var(--line)}
-.f:nth-child(2){background:var(--sun)}.f:nth-child(4){background:var(--blue);color:#fff}.f:nth-child(5){background:var(--pink);color:#fff}
-.f h3{font-size:1.4rem;margin-bottom:10px}.f p{font-size:.98rem;opacity:.9}
-/* demo */
-.demo{background:var(--ink);color:#fff;border-block:2px solid var(--line)}.demo .lead{color:#b8bcf0}
-.demo .w{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
-.ph{width:min(300px,100%);aspect-ratio:9/16;margin:auto;border:10px solid #000;border-radius:40px;background:#000;position:relative;overflow:hidden;box-shadow:0 0 0 3px var(--sun)}
-.rl{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:20px 18px 64px;font:800 1.5rem/1.05 var(--d)}
-.rl small{font:600 .85rem var(--b);opacity:.8}.ct{position:absolute;left:16px;right:16px;bottom:18px;display:flex;justify-content:space-between;font-weight:600;font-size:.85rem}
-.nd{position:absolute;inset:0;background:var(--sun);color:var(--ink);display:none;flex-direction:column;justify-content:center;gap:14px;padding:22px;text-align:center}
-.nd.on{display:flex}.nd b{font:800 2rem/1 var(--d);letter-spacing:-.03em}.nd button{align-self:center;background:var(--ink);color:#fff;border:0;border-radius:99px;padding:11px 20px;font:600 .95rem var(--b);cursor:pointer}
-.ctl{display:grid;gap:18px;margin-top:26px}.ctl label{font-weight:600;font-size:.95rem;display:grid;gap:6px}
-input[type=range]{width:100%;accent-color:var(--sun)}
-input[type=text],input[type=number],input[type=email],input[type=tel],input[type=password],select{width:100%;padding:13px 14px;border:2px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font:400 1rem var(--b)}
-/* install */
-.tabs{display:flex;gap:8px;margin:34px 0 0;flex-wrap:wrap}.tabs button{border:2px solid var(--line);border-radius:99px 99px 0 0;border-bottom:0;background:#fff;padding:10px 22px;font:600 .95rem var(--b);cursor:pointer}
-.tabs button[aria-selected=true]{background:var(--sun)}
-.pn{border:2px solid var(--line);border-radius:0 24px 24px 24px;background:#fff;padding:30px;box-shadow:5px 5px 0 var(--line)}
-.pn ol{margin:14px 0 22px;padding-left:1.3em}.pn li{margin:8px 0}code{background:var(--paper);border:1px solid #ccc;border-radius:6px;padding:1px 6px;font-size:.9em}
-.use{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
-.use div{border-top:3px solid var(--line);padding-top:14px}.use b{font:800 2.4rem var(--d);color:var(--blue);display:block}
-.note{margin-top:22px;padding:14px 18px;border:2px dashed var(--line);border-radius:16px;background:#fff;font-size:.95rem}
-/* form */
-.join{background:var(--sun);border-block:2px solid var(--line)}.join .w{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px}
-.cost{margin-top:26px;background:var(--ink);color:#fff;border-radius:22px;padding:22px}.cost b{font:800 3rem/1 var(--d);color:var(--sun);display:block}
-form{background:#fff;border:2px solid var(--line);border-radius:28px;padding:32px;box-shadow:8px 8px 0 var(--line);display:grid;gap:16px}
-fieldset{border:0;margin:0;padding:0;display:none;gap:16px}fieldset.on{display:grid}
-label{font-weight:600;font-size:.93rem;display:grid;gap:6px}.r2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.ph91{display:grid;grid-template-columns:64px 1fr;gap:8px}.ph91 span{border:2px solid var(--line);border-radius:14px;display:grid;place-items:center;background:var(--paper);font-weight:600}
-.dots{display:flex;gap:8px}.dots i{height:8px;flex:1;border-radius:9px;background:#ddd}.dots i.on{background:var(--blue)}
-.sl{display:grid;grid-template-columns:90px 1fr 56px;gap:10px;align-items:center}.sl output{text-align:right;font:800 1.05rem var(--d)}
-.ck{display:flex;gap:10px;font-weight:400;align-items:flex-start}.ck input{margin-top:5px;accent-color:var(--blue)}
-.nav2{display:flex;gap:12px;justify-content:space-between}#st{min-height:1.4em;font-weight:600}#st.err{color:#d6004c}#st.ok{color:#0a8a5c}
-.hp{position:absolute;left:-9999px}[hidden]{display:none!important}
-.hint{font-size:.85rem;color:var(--mute);font-weight:400}
-/* guides */
-.gg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
-details{border:2px solid var(--line);border-radius:22px;background:#fff;padding:22px;box-shadow:4px 4px 0 var(--line)}
-summary{cursor:pointer;font:800 1.2rem/1.1 var(--d);letter-spacing:-.02em;list-style:none}summary::after{content:" +";color:var(--blue)}
-details[open] summary::after{content:" –"}details p{margin-top:12px;font-size:.97rem;color:var(--mute)}
-.ab{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
-footer{background:var(--ink);color:#b8bcf0;padding:40px 0;font-size:.92rem}footer .w{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
-@media(max-width:860px){section{padding:64px 0}.hero .w,.demo .w,.join .w,.ab,.fg,.gg,.use{grid-template-columns:1fr}.stack{height:360px}nav a:not(.btn){display:none}.r2{grid-template-columns:1fr}form{padding:22px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.mc{opacity:1;transform:rotate(3deg)}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wapas – the meme that catches you mid-scroll</title>
+  <meta name="description"
+    content="Wapas counts your reels and shorts, then covers the screen with a meme when you pass your limit. Free browser extension.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Sans:wght@400;600&family=Instrument+Serif:ital@1&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #10122e;
+      --blue: #2331ff;
+      --sun: #ffd23f;
+      --paper: #fff9ea;
+      --pink: #ff4d8d;
+      --mute: #51557f;
+      --line: #10122e;
+      --d: 'Syne', system-ui, sans-serif;
+      --b: 'Instrument Sans', system-ui, sans-serif;
+      --s: 'Instrument Serif', Georgia, serif
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 70px
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 400 1.05rem/1.6 var(--b)
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--d);
+      margin: 0;
+      line-height: .98;
+      letter-spacing: -.035em
+    }
+
+    p {
+      margin: 0
+    }
+
+    a {
+      color: inherit
+    }
+
+    i.s {
+      font: italic 400 1.08em var(--s);
+      letter-spacing: 0
+    }
+
+    .w {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 22px
+    }
+
+    section {
+      padding: 96px 0
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--sun);
+      outline-offset: 3px
+    }
+
+    .btn {
+      display: inline-block;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      padding: 14px 26px;
+      font: 600 1rem var(--b);
+      background: var(--sun);
+      color: var(--ink);
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 var(--line);
+      transition: .15s
+    }
+
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--line)
+    }
+
+    .btn.alt {
+      background: #fff
+    }
+
+    .btn.blue {
+      background: var(--blue);
+      color: #fff
+    }
+
+    .btn:disabled {
+      opacity: .55;
+      cursor: wait
+    }
+
+    .tag {
+      font: 600 .8rem var(--b);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 14px;
+      display: block
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 5.4vw, 4rem);
+      margin-bottom: 18px
+    }
+
+    .lead {
+      color: var(--mute);
+      max-width: 52ch;
+      font-size: 1.15rem
+    }
+
+    /* nav + hero */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--paper);
+      border-bottom: 2px solid var(--line)
+    }
+
+    nav .w {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      height: 64px
+    }
+
+    nav b {
+      font: 800 1.5rem var(--d);
+      letter-spacing: -.04em;
+      margin-right: auto
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .95rem
+    }
+
+    nav a.btn {
+      padding: 9px 18px;
+      box-shadow: 3px 3px 0 var(--line)
+    }
+
+    .hero {
+      background: var(--blue);
+      color: #fff;
+      border-bottom: 2px solid var(--line);
+      padding: 70px 0 90px;
+      overflow: hidden
+    }
+
+    .hero .w {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 40px;
+      align-items: center
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 9vw, 7rem)
+    }
+
+    .hero h1 i.s {
+      color: var(--sun)
+    }
+
+    .hero .lead {
+      color: #dfe2ff;
+      margin: 24px 0 30px
+    }
+
+    .cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap
+    }
+
+    .stack {
+      position: relative;
+      height: 420px
+    }
+
+    .rc {
+      position: absolute;
+      inset: 20px 40px 0 0;
+      border: 3px solid var(--line);
+      border-radius: 30px;
+      background: linear-gradient(165deg, #ff4d8d, #3b1b8f);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      font: 800 1.6rem/1.05 var(--d);
+      transform: rotate(-4deg);
+      box-shadow: 8px 8px 0 var(--line)
+    }
+
+    .rc small {
+      font: 600 .85rem var(--b);
+      opacity: .85
+    }
+
+    .rc span {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: #fff;
+      color: var(--ink);
+      border-radius: 99px;
+      padding: 4px 12px;
+      font: 600 .85rem var(--b)
+    }
+
+    .mc {
+      position: absolute;
+      inset: 90px 0 40px 70px;
+      background: var(--sun);
+      color: var(--ink);
+      border: 3px solid var(--line);
+      border-radius: 26px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      font: 800 2.1rem/1 var(--d);
+      box-shadow: 8px 8px 0 var(--line);
+      opacity: 0;
+      animation: slam 6s infinite
+    }
+
+    .mc small {
+      font: 600 .95rem var(--b)
+    }
+
+    @keyframes slam {
+
+      0%,
+      38% {
+        opacity: 0;
+        transform: scale(2.2) rotate(-12deg)
+      }
+
+      46% {
+        opacity: 1;
+        transform: scale(.96) rotate(3deg)
+      }
+
+      50%,
+      90% {
+        opacity: 1;
+        transform: scale(1) rotate(3deg)
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1) rotate(3deg)
+      }
+    }
+
+    .mq {
+      background: var(--sun);
+      border-bottom: 2px solid var(--line);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 14px 0;
+      font: 800 1.3rem var(--d)
+    }
+
+    .mq div {
+      display: inline-block;
+      animation: mq 28s linear infinite
+    }
+
+    @keyframes mq {
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    /* features */
+    .fg {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 42px
+    }
+
+    .f {
+      border: 2px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      background: #fff;
+      box-shadow: 5px 5px 0 var(--line)
+    }
+
+    .f:nth-child(2) {
+      background: var(--sun)
+    }
+
+    .f:nth-child(4) {
+      background: var(--blue);
+      color: #fff
+    }
+
+    .f:nth-child(5) {
+      background: var(--pink);
+      color: #fff
+    }
+
+    .f h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px
+    }
+
+    .f p {
+      font-size: .98rem;
+      opacity: .9
+    }
+
+    /* demo */
+    .demo {
+      background: var(--ink);
+      color: #fff;
+      border-block: 2px solid var(--line)
+    }
+
+    .demo .lead {
+      color: #b8bcf0
+    }
+
+    .demo .w {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center
+    }
+
+    .ph {
+      width: min(300px, 100%);
+      aspect-ratio: 9/16;
+      margin: auto;
+      border: 10px solid #000;
+      border-radius: 40px;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 0 3px var(--sun)
+    }
+
+    .rl {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px 18px 64px;
+      font: 800 1.5rem/1.05 var(--d)
+    }
+
+    .rl small {
+      font: 600 .85rem var(--b);
+      opacity: .8
+    }
+
+    .ct {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: .85rem
+    }
+
+    .nd {
+      position: absolute;
+      inset: 0;
+      background: var(--sun);
+      color: var(--ink);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+      padding: 22px;
+      text-align: center
+    }
+
+    .nd.on {
+      display: flex
+    }
+
+    .nd b {
+      font: 800 2rem/1 var(--d);
+      letter-spacing: -.03em
+    }
+
+    .nd button {
+      align-self: center;
+      background: var(--ink);
+      color: #fff;
+      border: 0;
+      border-radius: 99px;
+      padding: 11px 20px;
+      font: 600 .95rem var(--b);
+      cursor: pointer
+    }
+
+    .ctl {
+      display: grid;
+      gap: 18px;
+      margin-top: 26px
+    }
+
+    .ctl label {
+      font-weight: 600;
+      font-size: .95rem;
+      display: grid;
+      gap: 6px
+    }
+
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--sun)
+    }
+
+    input[type=text],
+    input[type=number],
+    input[type=email],
+    input[type=tel],
+    input[type=password],
+    select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--ink);
+      font: 400 1rem var(--b)
+    }
+
+    /* install */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin: 34px 0 0;
+      flex-wrap: wrap
+    }
+
+    .tabs button {
+      border: 2px solid var(--line);
+      border-radius: 99px 99px 0 0;
+      border-bottom: 0;
+      background: #fff;
+      padding: 10px 22px;
+      font: 600 .95rem var(--b);
+      cursor: pointer
+    }
+
+    .tabs button[aria-selected=true] {
+      background: var(--sun)
+    }
+
+    .pn {
+      border: 2px solid var(--line);
+      border-radius: 0 24px 24px 24px;
+      background: #fff;
+      padding: 30px;
+      box-shadow: 5px 5px 0 var(--line)
+    }
+
+    .pn ol {
+      margin: 14px 0 22px;
+      padding-left: 1.3em
+    }
+
+    .pn li {
+      margin: 8px 0
+    }
+
+    code {
+      background: var(--paper);
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-size: .9em
+    }
+
+    .use {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 40px
+    }
+
+    .use div {
+      border-top: 3px solid var(--line);
+      padding-top: 14px
+    }
+
+    .use b {
+      font: 800 2.4rem var(--d);
+      color: var(--blue);
+      display: block
+    }
+
+    .note {
+      margin-top: 22px;
+      padding: 14px 18px;
+      border: 2px dashed var(--line);
+      border-radius: 16px;
+      background: #fff;
+      font-size: .95rem
+    }
+
+    /* form */
+    .join {
+      background: var(--sun);
+      border-block: 2px solid var(--line)
+    }
+
+    .join .w {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 50px
+    }
+
+    .cost {
+      margin-top: 26px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 22px;
+      padding: 22px
+    }
+
+    .cost b {
+      font: 800 3rem/1 var(--d);
+      color: var(--sun);
+      display: block
+    }
+
+    form {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 8px 8px 0 var(--line);
+      display: grid;
+      gap: 16px
+    }
+
+    fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      display: none;
+      gap: 16px
+    }
+
+    fieldset.on {
+      display: grid
+    }
+
+    label {
+      font-weight: 600;
+      font-size: .93rem;
+      display: grid;
+      gap: 6px
+    }
+
+    .r2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    .ph91 {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 8px
+    }
+
+    .ph91 span {
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--paper);
+      font-weight: 600
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px
+    }
+
+    .dots i {
+      height: 8px;
+      flex: 1;
+      border-radius: 9px;
+      background: #ddd
+    }
+
+    .dots i.on {
+      background: var(--blue)
+    }
+
+    .sl {
+      display: grid;
+      grid-template-columns: 90px 1fr 56px;
+      gap: 10px;
+      align-items: center
+    }
+
+    .sl output {
+      text-align: right;
+      font: 800 1.05rem var(--d)
+    }
+
+    .ck {
+      display: flex;
+      gap: 10px;
+      font-weight: 400;
+      align-items: flex-start
+    }
+
+    .ck input {
+      margin-top: 5px;
+      accent-color: var(--blue)
+    }
+
+    .nav2 {
+      display: flex;
+      gap: 12px;
+      justify-content: space-between
+    }
+
+    #st {
+      min-height: 1.4em;
+      font-weight: 600
+    }
+
+    #st.err {
+      color: #d6004c
+    }
+
+    #st.ok {
+      color: #0a8a5c
+    }
+
+    .hp {
+      position: absolute;
+      left: -9999px
+    }
+
+    [hidden] {
+      display: none !important
+    }
+
+    .hint {
+      font-size: .85rem;
+      color: var(--mute);
+      font-weight: 400
+    }
+
+    /* guides */
+    .gg {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 40px
+    }
+
+    details {
+      border: 2px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+      padding: 22px;
+      box-shadow: 4px 4px 0 var(--line)
+    }
+
+    summary {
+      cursor: pointer;
+      font: 800 1.2rem/1.1 var(--d);
+      letter-spacing: -.02em;
+      list-style: none
+    }
+
+    summary::after {
+      content: " +";
+      color: var(--blue)
+    }
+
+    details[open] summary::after {
+      content: " –"
+    }
+
+    details p {
+      margin-top: 12px;
+      font-size: .97rem;
+      color: var(--mute)
+    }
+
+    .ab {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start
+    }
+
+    footer {
+      background: var(--ink);
+      color: #b8bcf0;
+      padding: 40px 0;
+      font-size: .92rem
+    }
+
+    footer .w {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: space-between
+    }
+
+    @media(max-width:860px) {
+      section {
+        padding: 64px 0
+      }
+
+      .hero .w,
+      .demo .w,
+      .join .w,
+      .ab,
+      .fg,
+      .gg,
+      .use {
+        grid-template-columns: 1fr
+      }
+
+      .stack {
+        height: 360px
+      }
+
+      nav a:not(.btn) {
+        display: none
+      }
+
+      .r2 {
+        grid-template-columns: 1fr
+      }
+
+      form {
+        padding: 22px
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+
+      .mc {
+        opacity: 1;
+        transform: rotate(3deg)
+      }
+    }
+  </style>
 </head>
+
 <body>
-<nav><div class="w"><b>Wapas</b><a href="#features">Features</a><a href="#demo">Demo</a><a href="#install">How it works</a><a href="#guides">Guides</a><a href="#about">About</a><a class="btn" href="#join">Get early access</a></div></nav>
+  <nav>
+    <div class="w"><b>Wapas</b><a href="#features">Features</a><a href="#demo">Demo</a><a href="#install">How it
+        works</a><a href="#guides">Guides</a><a href="#about">About</a><a class="btn" href="#join">Get early access</a>
+    </div>
+  </nav>
 
-<header class="hero"><div class="w">
- <div><h1>Caught <i class="s">mid-scroll</i> by a meme.</h1>
- <p class="lead">Wapas counts your reels and shorts. When you cross your limit, a full-screen meme covers the page and sends you back to the work you forgot.</p>
- <div class="cta"><a class="btn" href="#install">Install the extension</a><a class="btn alt" href="#join">Join the early list</a></div></div>
- <div class="stack" aria-hidden="true"><div class="rc"><span>10 / 10</span><small>@reels.daily</small>Cat vs. cucumber</div><div class="mc"><small>10 reels in a row</small>Kyu ni ho rhi padhai?</div></div>
-</div></header>
-<div class="mq" aria-hidden="true"><div>Kyu ni ho rhi padhai? ✦ Reel khatam, kaam shuru ✦ Beta, scroll baad mein ✦ Wapas aaja ✦ Padhai kaun karega? ✦ Kyu ni ho rhi padhai? ✦ Reel khatam, kaam shuru ✦ Beta, scroll baad mein ✦ Wapas aaja ✦ Padhai kaun karega? ✦ </div></div>
+  <header class="hero">
+    <div class="w">
+      <div>
+        <h1>Caught <i class="s">mid-scroll</i> by a meme.</h1>
+        <p class="lead">Wapas counts your reels and shorts. When you cross your limit, a full-screen meme covers the
+          page and sends you back to the work you forgot.</p>
+        <div class="cta"><a class="btn" href="#install">Install the extension</a><a class="btn alt" href="#join">Join
+            the early list</a></div>
+      </div>
+      <div class="stack" aria-hidden="true">
+        <div class="rc"><span>10 / 10</span><small>@reels.daily</small>Cat vs. cucumber</div>
+        <div class="mc"><small>10 reels in a row</small>Kyu ni ho rhi padhai?</div>
+      </div>
+    </div>
+  </header>
+  <div class="mq" aria-hidden="true">
+    <div>Kyu ni ho rhi padhai? ✦ Reel khatam, kaam shuru ✦ Beta, scroll baad mein ✦ Wapas aaja ✦ Padhai kaun karega? ✦
+      Kyu ni ho rhi padhai? ✦ Reel khatam, kaam shuru ✦ Beta, scroll baad mein ✦ Wapas aaja ✦ Padhai kaun karega? ✦
+    </div>
+  </div>
 
-<section id="features"><div class="w"><span class="tag">Features</span><h2>Small tool. <i class="s">One</i> job.</h2>
-<p class="lead">Wapas does one thing: it notices when a quick look turned into a long scroll, and it interrupts you.</p>
-<div class="fg">
-<div class="f"><h3>Counts reels and shorts</h3><p>Works on Instagram Reels, YouTube Shorts, Snapchat and Facebook in your desktop browser.</p></div>
-<div class="f"><h3>Time limits per app</h3><p>Set daily minutes for each app. When the minutes are gone, you get a nudge.</p></div>
-<div class="f"><h3>The limit shrinks</h3><p>Skip a meme and the next one comes sooner: 10 reels, then 8, then 6, never below 4.</p></div>
-<div class="f"><h3>Shows your task</h3><p>Type “Maths homework” once. The meme reminds you what you were supposed to be doing.</p></div>
-<div class="f"><h3>Private by design</h3><p>Counts stay on your device. Wapas reads only the page address, never your messages or posts.</p></div>
-<div class="f"><h3>Free</h3><p>No ads, no tracking, no payment. Just a meme with good timing.</p></div>
-</div></div></section>
+  <section id="features">
+    <div class="w"><span class="tag">Features</span>
+      <h2>Small tool. <i class="s">One</i> job.</h2>
+      <p class="lead">Wapas does one thing: it notices when a quick look turned into a long scroll, and it interrupts
+        you.</p>
+      <div class="fg">
+        <div class="f">
+          <h3>Counts reels and shorts</h3>
+          <p>Works on Instagram Reels, YouTube Shorts, Snapchat and Facebook in your desktop browser.</p>
+        </div>
+        <div class="f">
+          <h3>Time limits per app</h3>
+          <p>Set daily minutes for each app. When the minutes are gone, you get a nudge.</p>
+        </div>
+        <div class="f">
+          <h3>The limit shrinks</h3>
+          <p>Skip a meme and the next one comes sooner: 10 reels, then 8, then 6, never below 4.</p>
+        </div>
+        <div class="f">
+          <h3>Shows your task</h3>
+          <p>Type “Maths homework” once. The meme reminds you what you were supposed to be doing.</p>
+        </div>
+        <div class="f">
+          <h3>Private by design</h3>
+          <p>Counts stay on your device. Wapas reads only the page address, never your messages or posts.</p>
+        </div>
+        <div class="f">
+          <h3>Free</h3>
+          <p>No ads, no tracking, no payment. Just a meme with good timing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="demo" id="demo"><div class="w">
- <div><span class="tag" style="color:var(--sun)">Interactive demo</span><h2>Try getting <i class="s" style="color:var(--sun)">caught.</i></h2>
- <p class="lead">Press “Scroll a reel” until the meme lands. Dismiss it and watch your next limit get smaller.</p>
- <div class="ctl"><label>Reels before a nudge: <b id="limv">10</b><input type="range" id="lim" min="3" max="20" value="10"></label>
- <label>What should you be doing?<input type="text" id="tk" maxlength="40" placeholder="e.g. Maths homework"></label>
- <div><button class="btn" id="go" type="button">Scroll a reel</button></div></div></div>
- <div class="ph" id="ph"><div class="rl" id="rl"></div><div class="ct"><span id="cn">0 reels</span><span id="lf"></span></div>
- <div class="nd" id="nd" role="alertdialog"><small id="ns"></small><b id="nm"></b><small id="nt"></small><button id="bk" type="button">Okay, back to work</button></div></div>
-</div></section>
+  <section class="demo" id="demo">
+    <div class="w">
+      <div><span class="tag" style="color:var(--sun)">Interactive demo</span>
+        <h2>Try getting <i class="s" style="color:var(--sun)">caught.</i></h2>
+        <p class="lead">Press “Scroll a reel” until the meme lands. Dismiss it and watch your next limit get smaller.
+        </p>
+        <div class="ctl"><label>Reels before a nudge: <b id="limv">10</b><input type="range" id="lim" min="3" max="20"
+              value="10"></label>
+          <label>What should you be doing?<input type="text" id="tk" maxlength="40"
+              placeholder="e.g. Maths homework"></label>
+          <div><button class="btn" id="go" type="button">Scroll a reel</button></div>
+        </div>
+      </div>
+      <div class="ph" id="ph">
+        <div class="rl" id="rl"></div>
+        <div class="ct"><span id="cn">0 reels</span><span id="lf"></span></div>
+        <div class="nd" id="nd" role="alertdialog"><small id="ns"></small><b id="nm"></b><small id="nt"></small><button
+            id="bk" type="button">Okay, back to work</button></div>
+      </div>
+    </div>
+  </section>
 
-<section id="install"><div class="w"><span class="tag">How it works</span><h2>Install in <i class="s">one minute.</i></h2>
-<p class="lead">Wapas is a browser extension. Pick your browser below. There is nothing to set up after installing.</p>
-<div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-t="p1">Opera</button><button role="tab" aria-selected="false" data-t="p2">Chrome / Edge</button><button role="tab" aria-selected="false" data-t="p3">Firefox</button></div>
-<div class="pn" id="p1"><b>Opera Add-ons</b><p>Our Opera listing is in review. When it is live, the button below opens it.</p>
-<ol><li>Open the listing and click <b>Add to Opera</b>.</li><li>Click the <b>cube icon</b> at the top right of the address bar.</li><li>Find Wapas and click the <b>pin</b>.</li></ol><a class="btn" id="opl" href="#join">Opera listing: coming soon</a></div>
-<div class="pn" id="p2" hidden><b>Manual install (until the store listing is live)</b>
-<ol><li>Download the file below and <b>extract</b> it (right-click, Extract All).</li><li>Open <code>chrome://extensions</code> (Edge: <code>edge://extensions</code>).</li><li>Turn on <b>Developer mode</b> (top right).</li><li>Click <b>Load unpacked</b> and choose the extracted folder.</li><li>Click the puzzle icon and <b>pin Wapas</b>.</li></ol><a class="btn" href="wapas-chrome.zip" download>Download for Chrome / Edge</a></div>
-<div class="pn" id="p3" hidden><b>Firefox</b><p>The Firefox version is built and still waiting for its store listing. Join the early list and we will tell you when it is ready.</p><p style="margin-top:16px"><a class="btn" href="#join">Join the early list</a></p></div>
-<div class="use"><div><b>1</b>Click the Wapas icon to set your reel limit.</div><div><b>2</b>Type your task so the meme can remind you.</div><div><b>3</b>Press “Show a test meme” to see it work.</div><div><b>4</b>Scroll normally. The number on the icon counts your reels.</div></div>
-<p class="note"><b>Good to know:</b> Wapas works in desktop browsers only. It cannot count reels inside the Instagram or YouTube phone apps. An Android app is the next project.</p></div></section>
+  <section id="install">
+    <div class="w"><span class="tag">How it works</span>
+      <h2>Install in <i class="s">one minute.</i></h2>
+      <p class="lead">Wapas is a browser extension. Pick your browser below. There is nothing to set up after
+        installing.</p>
+      <div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-t="p1">Opera</button><button
+          role="tab" aria-selected="false" data-t="p2">Chrome / Edge</button><button role="tab" aria-selected="false"
+          data-t="p3">Firefox</button></div>
+      <div class="pn" id="p1"><b>Opera Add-ons</b>
+        <p>Our Opera listing is in review. When it is live, the button below opens it.</p>
+        <ol>
+          <li>Open the listing and click <b>Add to Opera</b>.</li>
+          <li>Click the <b>cube icon</b> at the top right of the address bar.</li>
+          <li>Find Wapas and click the <b>pin</b>.</li>
+        </ol><a class="btn" id="opl" href="#join">Opera listing: coming soon</a>
+      </div>
+      <div class="pn" id="p2" hidden><b>Manual install (until the store listing is live)</b>
+        <ol>
+          <li>Download the file below and <b>extract</b> it (right-click, Extract All).</li>
+          <li>Open <code>chrome://extensions</code> (Edge: <code>edge://extensions</code>).</li>
+          <li>Turn on <b>Developer mode</b> (top right).</li>
+          <li>Click <b>Load unpacked</b> and choose the extracted folder.</li>
+          <li>Click the puzzle icon and <b>pin Wapas</b>.</li>
+        </ol><a class="btn" href="wapas-chrome.zip" download>Download for Chrome / Edge</a>
+      </div>
+      <div class="pn" id="p3" hidden><b>Firefox</b>
+        <p>The Firefox version is built and still waiting for its store listing. Join the early list and we will tell
+          you when it is ready.</p>
+        <p style="margin-top:16px"><a class="btn" href="#join">Join the early list</a></p>
+      </div>
+      <div class="use">
+        <div><b>1</b>Click the Wapas icon to set your reel limit.</div>
+        <div><b>2</b>Type your task so the meme can remind you.</div>
+        <div><b>3</b>Press “Show a test meme” to see it work.</div>
+        <div><b>4</b>Scroll normally. The number on the icon counts your reels.</div>
+      </div>
+      <p class="note"><b>Good to know:</b> Wapas works in desktop browsers only. It cannot count reels inside the
+        Instagram or YouTube phone apps. An Android app is the next project.</p>
+    </div>
+  </section>
 
-<section class="join" id="join"><div class="w">
- <div><span class="tag" style="color:var(--ink)">Early access</span><h2>Set your <i class="s">goal.</i></h2><p class="lead" style="color:var(--ink)">Tell us who you are and how much scrolling is okay. Early members get the account sync first.</p>
- <div class="cost"><b id="yr">0 days</b>of every year spent on social apps at your daily minutes.</div></div>
- <div><form id="f" novalidate autocomplete="off">
- <div class="dots" id="dots"><i class="on"></i><i></i><i></i></div>
- <fieldset class="on"><label>Full name<input type="text" name="name" maxlength="60"></label>
- <label>Phone number<div class="ph91"><span>+91</span><input type="tel" name="phone" inputmode="numeric" maxlength="10" placeholder="10-digit number"></div></label>
- <label>Email (Gmail is fine)<input type="email" name="email" maxlength="254"></label>
- <label class="pw">Password<input type="password" name="pw" minlength="8" autocomplete="new-password"><span class="hint">At least 8 characters. It is handled by Supabase Auth and never stored in our sign-up table.</span></label></fieldset>
- <fieldset><div class="r2"><label>Profession<select name="profession"><option value="">Choose one</option><option value="school_student">School student</option><option value="college_student">College student</option><option value="working_professional">Working professional</option><option value="freelancer">Freelancer</option><option value="other">Other</option></select></label>
- <label>Age<input type="number" name="age" min="8" max="100" inputmode="numeric"></label></div>
- <label>Nudge me after this many reels or shorts<input type="number" name="reel_nudge_every" min="3" max="50" value="10" inputmode="numeric"></label>
- <label class="sl">Instagram<input type="range" name="instagram_min" min="0" max="240" step="5" value="45"><output>45m</output></label>
- <label class="sl">YouTube<input type="range" name="youtube_min" min="0" max="240" step="5" value="45"><output>45m</output></label>
- <label class="sl">Snapchat<input type="range" name="snapchat_min" min="0" max="240" step="5" value="20"><output>20m</output></label>
- <label class="sl">Other apps<input type="range" name="other_min" min="0" max="240" step="5" value="20"><output>20m</output></label></fieldset>
- <fieldset><div class="r2"><label>Instagram handle (optional)<input type="text" name="instagram_handle" maxlength="31" placeholder="@username"></label><label>YouTube handle (optional)<input type="text" name="youtube_handle" maxlength="31" placeholder="@channel"></label></div>
- <label>Snapchat username (optional)<input type="text" name="snapchat_handle" maxlength="31"></label>
- <input class="hp" type="text" name="company_site" tabindex="-1" autocomplete="off" aria-hidden="true">
- <label class="ck" id="gd" hidden><input type="checkbox" name="guardian"> I am under 18 and my parent or guardian knows I am signing up.</label>
- <label class="ck"><input type="checkbox" name="consent"> I agree that Wapas can store these answers to set up my nudges. I have read the <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.</label></fieldset>
- <div class="nav2"><button class="btn alt" type="button" id="pv" hidden>Back</button><button class="btn blue" type="button" id="nx" style="margin-left:auto">Next</button><button class="btn blue" type="submit" id="sb" hidden style="margin-left:auto">Join the early list</button></div>
- <p id="st" role="status" aria-live="polite"></p></form>
- <div id="done" class="pn" hidden style="text-align:center"><h3 id="dt" style="font-size:2rem"></h3><p id="dp" style="margin-top:10px"></p></div></div>
-</div></section>
+  <section class="join" id="join">
+    <div class="w">
+      <div><span class="tag" style="color:var(--ink)">Early access</span>
+        <h2>Set your <i class="s">goal.</i></h2>
+        <p class="lead" style="color:var(--ink)">Tell us who you are and how much scrolling is okay. Early members get
+          the account sync first.</p>
+        <div class="cost"><b id="yr">0 days</b>of every year spent on social apps at your daily minutes.</div>
+      </div>
+      <div>
+        <form id="f" novalidate autocomplete="off">
+          <div class="dots" id="dots"><i class="on"></i><i></i><i></i></div>
+          <fieldset class="on"><label>Full name<input type="text" name="name" maxlength="60"></label>
+            <label>Phone number<div class="ph91"><span>+91</span><input type="tel" name="phone" inputmode="numeric"
+                  maxlength="10" placeholder="10-digit number"></div></label>
+            <label>Email (Gmail is fine)<input type="email" name="email" maxlength="254"></label>
+            <label class="pw">Password<input type="password" name="pw" minlength="8" autocomplete="new-password"><span
+                class="hint">At least 8 characters. It is handled by Supabase Auth and never stored in our sign-up
+                table.</span></label>
+          </fieldset>
+          <fieldset>
+            <div class="r2"><label>Profession<select name="profession">
+                  <option value="">Choose one</option>
+                  <option value="school_student">School student</option>
+                  <option value="college_student">College student</option>
+                  <option value="working_professional">Working professional</option>
+                  <option value="freelancer">Freelancer</option>
+                  <option value="other">Other</option>
+                </select></label>
+              <label>Age<input type="number" name="age" min="8" max="100" inputmode="numeric"></label>
+            </div>
+            <label>Nudge me after this many reels or shorts<input type="number" name="reel_nudge_every" min="3" max="50"
+                value="10" inputmode="numeric"></label>
+            <label class="sl">Instagram<input type="range" name="instagram_min" min="0" max="240" step="5"
+                value="45"><output>45m</output></label>
+            <label class="sl">YouTube<input type="range" name="youtube_min" min="0" max="240" step="5"
+                value="45"><output>45m</output></label>
+            <label class="sl">Snapchat<input type="range" name="snapchat_min" min="0" max="240" step="5"
+                value="20"><output>20m</output></label>
+            <label class="sl">Other apps<input type="range" name="other_min" min="0" max="240" step="5"
+                value="20"><output>20m</output></label>
+          </fieldset>
+          <fieldset>
+            <div class="r2"><label>Instagram handle (optional)<input type="text" name="instagram_handle" maxlength="31"
+                  placeholder="@username"></label><label>YouTube handle (optional)<input type="text"
+                  name="youtube_handle" maxlength="31" placeholder="@channel"></label></div>
+            <label>Snapchat username (optional)<input type="text" name="snapchat_handle" maxlength="31"></label>
+            <input class="hp" type="text" name="company_site" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <label class="ck" id="gd" hidden><input type="checkbox" name="guardian"> I am under 18 and my parent or
+              guardian knows I am signing up.</label>
+            <label class="ck"><input type="checkbox" name="consent"> I agree that Wapas can store these answers to set
+              up my nudges. I have read the <a href="privacy.html" target="_blank" rel="noopener">privacy
+                policy</a>.</label>
+          </fieldset>
+          <div class="nav2"><button class="btn alt" type="button" id="pv" hidden>Back</button><button class="btn blue"
+              type="button" id="nx" style="margin-left:auto">Next</button><button class="btn blue" type="submit" id="sb"
+              hidden style="margin-left:auto">Join the early list</button></div>
+          <p id="st" role="status" aria-live="polite"></p>
+        </form>
+        <div id="done" class="pn" hidden style="text-align:center">
+          <h3 id="dt" style="font-size:2rem"></h3>
+          <p id="dp" style="margin-top:10px"></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="guides"><div class="w"><span class="tag">Guides</span><h2>Understand the <i class="s">scroll.</i></h2><p class="lead">Short, practical reads on why we keep scrolling and how to take back your time.</p>
-<div class="gg">
-<details><summary>Why do we keep scrolling?</summary><p>Feeds never end, so there is no natural moment to stop. Each swipe might bring something great or something boring, and that uncertainty is what keeps people swiping. Reels also autoplay, so the default action is to keep watching. Stopping needs a decision; continuing needs none. Wapas adds the missing stopping point.</p></details>
-<details><summary>How to build healthier screen habits</summary><p>Start with one rule, not ten. Pick a limit you can actually keep, for example one 10-reel session after study. Put your phone out of reach while working. Replace the habit, don’t only remove it: a short walk or a drink of water fills the same “break” slot. Review once a week and adjust.</p></details>
-<details><summary>How to manage Instagram usage</summary><p>Turn off notifications you don’t need and log out on your study device. Set a daily minute limit for the app, in Wapas or in your phone’s own settings. Notice what you open it for: boredom, a break, or a habit. Decide ahead of time when you will check it, so it stops being the thing you do between everything.</p></details>
-<details><summary>Digital wellbeing guides</summary><p>Screen time is not bad by itself; what matters is whether you chose it. Watch for signs: losing track of time, feeling worse after scrolling, or skipping sleep. Basic care helps: no screens in the last hour before bed, regular breaks, and time with people offline. If scrolling feels out of your control, talk to someone you trust.</p></details>
-<details><summary>Productivity and focus guides</summary><p>Work in blocks of 25 to 50 minutes, then take a real break away from feeds. Write the one task you are doing and keep it visible. Wapas shows it on the meme for this reason. Start the task for just five minutes; starting is usually the hardest part. Keep your phone in another room if you can.</p></details>
-<details><summary>Original research and useful insights</summary><p>Some numbers, from simple arithmetic you can check: 45 minutes a day on one app is about 11 full days a year. Ten reels of 30 seconds each is five minutes, which feels like nothing but repeats many times a day. A limit that shrinks 10, 8, 6, 4 stops you after 28 reels in total. Once enough members join, we will publish anonymous averages here.</p></details>
-</div></div></section>
+  <section id="guides">
+    <div class="w"><span class="tag">Guides</span>
+      <h2>Understand the <i class="s">scroll.</i></h2>
+      <p class="lead">Short, practical reads on why we keep scrolling and how to take back your time.</p>
+      <div class="gg">
+        <details>
+          <summary>Why do we keep scrolling?</summary>
+          <p>Feeds never end, so there is no natural moment to stop. Each swipe might bring something great or something
+            boring, and that uncertainty is what keeps people swiping. Reels also autoplay, so the default action is to
+            keep watching. Stopping needs a decision; continuing needs none. Wapas adds the missing stopping point.</p>
+        </details>
+        <details>
+          <summary>How to build healthier screen habits</summary>
+          <p>Start with one rule, not ten. Pick a limit you can actually keep, for example one 10-reel session after
+            study. Put your phone out of reach while working. Replace the habit, don’t only remove it: a short walk or a
+            drink of water fills the same “break” slot. Review once a week and adjust.</p>
+        </details>
+        <details>
+          <summary>How to manage Instagram usage</summary>
+          <p>Turn off notifications you don’t need and log out on your study device. Set a daily minute limit for the
+            app, in Wapas or in your phone’s own settings. Notice what you open it for: boredom, a break, or a habit.
+            Decide ahead of time when you will check it, so it stops being the thing you do between everything.</p>
+        </details>
+        <details>
+          <summary>Digital wellbeing guides</summary>
+          <p>Screen time is not bad by itself; what matters is whether you chose it. Watch for signs: losing track of
+            time, feeling worse after scrolling, or skipping sleep. Basic care helps: no screens in the last hour before
+            bed, regular breaks, and time with people offline. If scrolling feels out of your control, talk to someone
+            you trust.</p>
+        </details>
+        <details>
+          <summary>Productivity and focus guides</summary>
+          <p>Work in blocks of 25 to 50 minutes, then take a real break away from feeds. Write the one task you are
+            doing and keep it visible. Wapas shows it on the meme for this reason. Start the task for just five minutes;
+            starting is usually the hardest part. Keep your phone in another room if you can.</p>
+        </details>
+        <details>
+          <summary>Original research and useful insights</summary>
+          <p>Some numbers, from simple arithmetic you can check: 45 minutes a day on one app is about 11 full days a
+            year. Ten reels of 30 seconds each is five minutes, which feels like nothing but repeats many times a day. A
+            limit that shrinks 10, 8, 6, 4 stops you after 28 reels in total. Once enough members join, we will publish
+            anonymous averages here.</p>
+        </details>
+      </div>
+    </div>
+  </section>
 
-<section id="about" style="background:#fff;border-top:2px solid var(--line)"><div class="w ab">
-<div><span class="tag">About Wapas</span><h2>“Wapas” means <i class="s">come back.</i></h2></div>
-<div><p class="lead">Wapas started as a simple idea from India: a meme in your own language can work better than a stern reminder. It is built by one beginner developer, for students and young professionals who want to take back focus. It is free, it is early, and your feedback shapes it. Write to us from the support page.</p></div></div></section>
+  <section id="about" style="background:#fff;border-top:2px solid var(--line)">
+    <div class="w ab">
+      <div><span class="tag">About Wapas</span>
+        <h2>“Wapas” means <i class="s">come back.</i></h2>
+      </div>
+      <div>
+        <p class="lead">Wapas started as a simple idea from India: a meme in your own language can work better than a
+          stern reminder. It is built by one beginner developer, for students and young professionals who want to take
+          back focus. It is free, it is early, and your feedback shapes it. Write to us from the support page.</p>
+      </div>
+    </div>
+  </section>
 
-<footer><div class="w"><span>© Wapas. An early project from India.</span><span><a href="privacy.html">Privacy policy</a>    <a href="terms.html">Terms and Conditions</a>    <a href="content.html">Support</a>    <a href="about.html">About</a>     <a href="popup.js">Popup</a></span></div></footer>
+  <footer>
+    <div class="w"><span>© Wapas. An early project from India.</span><span><a href="privacy.html">Privacy policy</a> ·
+        <a href="support.html">Support</a></span></div>
+  </footer>
 
-<script>
-/* ===== CONFIG ===== */
-const SUPABASE_URL="https://cbfgrvagzlxekszhjkrg.supabase.co";
-const SUPABASE_KEY="sb_publishable_PzGfAciP0L_8ghOojEKpdg_Y_2TAvv1"; // public key only. Never a secret or service_role key.
-const COLLECT_PASSWORD=true;  // false = hide password and skip Supabase Auth
-const OPERA_URL="";           // paste your Opera Add-ons link here once approved
-/* ================== */
-const $=id=>document.getElementById(id);
-if(OPERA_URL){$("opl").href=OPERA_URL;$("opl").textContent="Add to Opera";$("opl").target="_blank"}
-document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-selected",x===b));["p1","p2","p3"].forEach(p=>$(p).hidden=p!==b.dataset.t)});
-/* demo */
-const M=[["Kyu ni ho rhi padhai?","Phone rakh. Das minute kaam pehle."],["Reel khatam, kaam shuru.","The next reel can wait."],["Beta, scroll baad mein.","Your work won’t finish itself."],["Wapas aaja.","You were in the middle of something."]];
-const R=[["Cat vs. cucumber","#5b6bff"],["Soap cutting loop","#e0356f"],["Street food tour","#12a58a"],["Last-over six","#f08a1c"],["Chai in the rain","#c4462a"]];
-let lim=10,n=0,sn=0,hold=false;
-function draw(){$("cn").textContent=n+(n===1?" reel":" reels");$("lf").textContent=(lim-sn)+" until a nudge"}
-$("go").onclick=()=>{if(hold)return;n++;sn++;const r=R[n%R.length];$("rl").style.background="linear-gradient(165deg,"+r[1]+",#000)";$("rl").innerHTML="<small>@reels.daily</small>"+r[0];
- if(sn>=lim){hold=true;const m=M[Math.floor(Math.random()*M.length)],t=$("tk").value.trim();$("ns").textContent=sn+" reels in a row";$("nm").textContent=m[0];$("nt").textContent=t?"You were supposed to be doing: "+t:m[1];$("nd").classList.add("on")}draw()};
-$("bk").onclick=()=>{$("nd").classList.remove("on");sn=0;lim=Math.max(4,lim-2);hold=false;$("lim").value=Math.max(3,lim);$("limv").textContent=lim;draw()};
-$("lim").oninput=e=>{lim=+e.target.value;sn=0;$("limv").textContent=lim;draw()};
-$("go").click();n=0;sn=0;draw();
-/* form */
-const f=$("f"),st=$("st"),say=(t,c)=>{st.textContent=t;st.className=c||""},fs=[...f.querySelectorAll("fieldset")],rs=[...f.querySelectorAll("input[type=range]")];
-let step=0;const g=k=>String(new FormData(f).get(k)||"").trim();
-function cost(){let t=0;rs.forEach(r=>{r.nextElementSibling.textContent=r.value+"m";t+=+r.value});const d=t*365/60/24;$("yr").textContent=(d>=10?Math.round(d):d.toFixed(1))+" days"}
-rs.forEach(r=>r.oninput=cost);cost();
-if(!COLLECT_PASSWORD)document.querySelectorAll(".pw").forEach(e=>e.hidden=true);
-f.age.oninput=()=>{$("gd").hidden=!(+f.age.value>=8&&+f.age.value<18)};
-function show(){fs.forEach((x,i)=>x.classList.toggle("on",i===step));[...$("dots").children].forEach((d,i)=>d.classList.toggle("on",i<=step));$("pv").hidden=step===0;$("nx").hidden=step===2;$("sb").hidden=step!==2;say("")}
-function bad(s){const hnd=/^[A-Za-z0-9._]{0,30}$/;
- if(s===0){if(!g("name")||g("name").length>60)return"Enter your name (up to 60 characters).";if(!/^[6-9]\d{9}$/.test(g("phone")))return"Enter a 10-digit Indian mobile number.";
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(g("email")))return"Enter a valid email.";if(COLLECT_PASSWORD&&g("pw").length<8)return"Password needs at least 8 characters."}
- if(s===1){if(!g("profession"))return"Choose your profession.";const a=+g("age");if(!(a>=8&&a<=100))return"Enter an age between 8 and 100.";const r=+g("reel_nudge_every");if(!(r>=3&&r<=50))return"Reel limit must be between 3 and 50."}
- if(s===2){if(["instagram_handle","youtube_handle","snapchat_handle"].some(k=>!hnd.test(g(k).replace(/^@/,""))))return"Handles can use letters, numbers, dots and underscores only.";
-  if(+g("age")<18&&!f.guardian.checked)return"Please confirm your parent or guardian knows.";if(!f.consent.checked)return"Tick the agreement box to continue."}return""}
-$("nx").onclick=()=>{const m=bad(step);if(m)return say(m,"err");step++;show()};$("pv").onclick=()=>{step--;show()};
-f.onsubmit=async e=>{e.preventDefault();if(g("company_site"))return;for(let s=0;s<3;s++){const m=bad(s);if(m){step=s;show();return say(m,"err")}}
- const h=k=>g(k).replace(/^@/,""),i=k=>parseInt(g(k),10),email=g("email").toLowerCase(),phone="+91"+g("phone");
- const row={name:g("name"),profession:g("profession"),age:i("age"),reel_nudge_every:i("reel_nudge_every"),instagram_min:i("instagram_min"),youtube_min:i("youtube_min"),snapchat_min:i("snapchat_min"),other_min:i("other_min"),instagram_handle:h("instagram_handle"),youtube_handle:h("youtube_handle"),snapchat_handle:h("snapchat_handle"),email,phone};
- const H={"Content-Type":"application/json",apikey:SUPABASE_KEY};if(SUPABASE_KEY.startsWith("eyJ"))H.Authorization="Bearer "+SUPABASE_KEY;
- const fin=(m)=>{f.hidden=true;$("done").hidden=false;$("dt").textContent="Welcome, "+row.name.split(" ")[0]+".";$("dp").textContent=m};
- if(!SUPABASE_KEY)return fin("Preview only: nothing was saved because no Supabase key is set.");
- $("sb").disabled=true;say("Saving…");
- try{if(COLLECT_PASSWORD){const a=await fetch(SUPABASE_URL+"/auth/v1/signup",{method:"POST",headers:{"Content-Type":"application/json",apikey:SUPABASE_KEY},body:JSON.stringify({email,password:g("pw"),data:{name:row.name,phone}})});
-  if(!a.ok){const j=await a.json().catch(()=>({}));say(a.status===429?"Too many sign-ups right now. Please try again in a little while.":(j.msg||j.message||"Could not create your account.")+"","err");$("sb").disabled=false;return}}
-  const r=await fetch(SUPABASE_URL+"/rest/v1/signups",{method:"POST",headers:Object.assign({Prefer:"return=minimal"},H),body:JSON.stringify(row)});
-  if(!r.ok)throw 0;fin("You’re on the list. Next: install the extension above and set your limits.")}
- catch(_){say("Couldn’t save your answers. Check your connection and try again.","err");$("sb").disabled=false}};
-</script>
+  <script>
+    /* ===== CONFIG ===== */
+    const SUPABASE_URL = "https://cbfgrvagzlxekszhjkrg.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_PzGfAciP0L_8ghOojEKpdg_Y_2TAvv1"; // public key only. Never a secret or service_role key.
+    const COLLECT_PASSWORD = true;  // false = hide password and skip Supabase Auth
+    const OPERA_URL = "";           // paste your Opera Add-ons link here once approved
+    /* ================== */
+    const $ = id => document.getElementById(id);
+    if (OPERA_URL) { $("opl").href = OPERA_URL; $("opl").textContent = "Add to Opera"; $("opl").target = "_blank" }
+    document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x === b));["p1", "p2", "p3"].forEach(p => $(p).hidden = p !== b.dataset.t) });
+    /* demo */
+    const M = [["Kyu ni ho rhi padhai?", "Phone rakh. Das minute kaam pehle."], ["Reel khatam, kaam shuru.", "The next reel can wait."], ["Beta, scroll baad mein.", "Your work won’t finish itself."], ["Wapas aaja.", "You were in the middle of something."]];
+    const R = [["Cat vs. cucumber", "#5b6bff"], ["Soap cutting loop", "#e0356f"], ["Street food tour", "#12a58a"], ["Last-over six", "#f08a1c"], ["Chai in the rain", "#c4462a"]];
+    let lim = 10, n = 0, sn = 0, hold = false;
+    function draw() { $("cn").textContent = n + (n === 1 ? " reel" : " reels"); $("lf").textContent = (lim - sn) + " until a nudge" }
+    $("go").onclick = () => {
+      if (hold) return; n++; sn++; const r = R[n % R.length]; $("rl").style.background = "linear-gradient(165deg," + r[1] + ",#000)"; $("rl").innerHTML = "<small>@reels.daily</small>" + r[0];
+      if (sn >= lim) { hold = true; const m = M[Math.floor(Math.random() * M.length)], t = $("tk").value.trim(); $("ns").textContent = sn + " reels in a row"; $("nm").textContent = m[0]; $("nt").textContent = t ? "You were supposed to be doing: " + t : m[1]; $("nd").classList.add("on") } draw()
+    };
+    $("bk").onclick = () => { $("nd").classList.remove("on"); sn = 0; lim = Math.max(4, lim - 2); hold = false; $("lim").value = Math.max(3, lim); $("limv").textContent = lim; draw() };
+    $("lim").oninput = e => { lim = +e.target.value; sn = 0; $("limv").textContent = lim; draw() };
+    $("go").click(); n = 0; sn = 0; draw();
+    /* form */
+    const f = $("f"), st = $("st"), say = (t, c) => { st.textContent = t; st.className = c || "" }, fs = [...f.querySelectorAll("fieldset")], rs = [...f.querySelectorAll("input[type=range]")];
+    let step = 0, authed = false; const g = k => String(new FormData(f).get(k) || "").trim();
+    function cost() { let t = 0; rs.forEach(r => { r.nextElementSibling.textContent = r.value + "m"; t += +r.value }); const d = t * 365 / 60 / 24; $("yr").textContent = (d >= 10 ? Math.round(d) : d.toFixed(1)) + " days" }
+    rs.forEach(r => r.oninput = cost); cost();
+    if (!COLLECT_PASSWORD) document.querySelectorAll(".pw").forEach(e => e.hidden = true);
+    f.age.oninput = () => { $("gd").hidden = !(+f.age.value >= 8 && +f.age.value < 18) };
+    function show() { fs.forEach((x, i) => x.classList.toggle("on", i === step));[...$("dots").children].forEach((d, i) => d.classList.toggle("on", i <= step)); $("pv").hidden = step === 0; $("nx").hidden = step === 2; $("sb").hidden = step !== 2; say("") }
+    function bad(s) {
+      const hnd = /^[A-Za-z0-9._]{0,30}$/;
+      if (s === 0) {
+        if (!g("name") || g("name").length > 60) return "Enter your name (up to 60 characters)."; if (!/^[6-9]\d{9}$/.test(g("phone"))) return "Enter a 10-digit Indian mobile number.";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(g("email"))) return "Enter a valid email."; if (COLLECT_PASSWORD && g("pw").length < 8) return "Password needs at least 8 characters."
+      }
+      if (s === 1) { if (!g("profession")) return "Choose your profession."; const a = +g("age"); if (!(a >= 8 && a <= 100)) return "Enter an age between 8 and 100."; const r = +g("reel_nudge_every"); if (!(r >= 3 && r <= 50)) return "Reel limit must be between 3 and 50." }
+      if (s === 2) {
+        if (["instagram_handle", "youtube_handle", "snapchat_handle"].some(k => !hnd.test(g(k).replace(/^@/, "")))) return "Handles can use letters, numbers, dots and underscores only.";
+        if (+g("age") < 18 && !f.guardian.checked) return "Please confirm your parent or guardian knows."; if (!f.consent.checked) return "Tick the agreement box to continue."
+      } return ""
+    }
+    $("nx").onclick = () => { const m = bad(step); if (m) return say(m, "err"); step++; show() }; $("pv").onclick = () => { step--; show() };
+    f.onsubmit = async e => {
+      e.preventDefault(); if (g("company_site")) return; for (let s = 0; s < 3; s++) { const m = bad(s); if (m) { step = s; show(); return say(m, "err") } }
+      const h = k => g(k).replace(/^@/, ""), i = k => parseInt(g(k), 10), email = g("email").toLowerCase(), phone = "+91" + g("phone");
+      const row = { name: g("name"), profession: g("profession"), age: i("age"), reel_nudge_every: i("reel_nudge_every"), instagram_min: i("instagram_min"), youtube_min: i("youtube_min"), snapchat_min: i("snapchat_min"), other_min: i("other_min"), instagram_handle: h("instagram_handle"), youtube_handle: h("youtube_handle"), snapchat_handle: h("snapchat_handle"), email, phone };
+      const H = { "Content-Type": "application/json", apikey: SUPABASE_KEY }; if (SUPABASE_KEY.startsWith("eyJ")) H.Authorization = "Bearer " + SUPABASE_KEY;
+      const fin = (m) => { f.hidden = true; $("done").hidden = false; $("dt").textContent = "Welcome, " + row.name.split(" ")[0] + "."; $("dp").textContent = m };
+      if (!SUPABASE_KEY) return fin("Preview only: nothing was saved because no Supabase key is set.");
+      $("sb").disabled = true; say("Saving…");
+      try {
+        if (COLLECT_PASSWORD && !authed) {
+          const a = await fetch(SUPABASE_URL + "/auth/v1/signup", { method: "POST", headers: { "Content-Type": "application/json", apikey: SUPABASE_KEY }, body: JSON.stringify({ email, password: g("pw"), data: { name: row.name, phone } }) });
+          if (!a.ok) { const j = await a.json().catch(() => ({})); say(a.status === 429 ? "Too many sign-ups right now. Please try again in a little while." : (j.msg || j.message || "Could not create your account.") + "", "err"); $("sb").disabled = false; return } authed = true
+        }
+        const r = await fetch(SUPABASE_URL + "/rest/v1/signups", { method: "POST", headers: Object.assign({ Prefer: "return=minimal" }, H), body: JSON.stringify(row) });
+        if (!r.ok) { const j = await r.json().catch(() => ({})); throw (j.message || "error " + r.status) } fin("You’re on the list. Next: install the extension above and set your limits.")
+      }
+      catch (e) { say("Couldn’t save: " + (typeof e === "string" ? e : "check your connection") + ".", "err"); $("sb").disabled = false }
+    };
+  </script>
 </body>
+
 </html>
