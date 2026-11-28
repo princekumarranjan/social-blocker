@@ -67,6 +67,16 @@
 
 <body>
     <h1>Wapas</h1>
+    <section id="authGate">
+        <p id="authMessage">Log in on the Wapas website to activate this extension.</p>
+        <button id="openWebsite" type="button">Log in / Connect account</button>
+        <h2>Already logged in?</h2>
+        <input class="w" id="pairCode" type="text" maxlength="32" placeholder="Paste one-time connection code">
+        <button id="connectCode" type="button">Connect extension</button>
+        <div id="authError" role="status" aria-live="polite" style="color:#b00045;margin-top:8px"></div>
+    </section>
+    <section id="app" hidden>
+        <div class="row"><span id="accountLabel">Connected</span><button id="logout" type="button" style="width:auto;margin:0;padding:6px 12px;background:#fff;color:#14173a">Log out</button></div>
     <h2>Today</h2>
     <div id="today"></div>
     <h2>Limits</h2>
@@ -78,6 +88,7 @@
     <h2>What should you be doing?</h2><input class="w" id="task" maxlength="80" placeholder="e.g. Maths homework">
     <button id="save">Save</button>
     <div id="ok"></div>
+    </section>
     <script src="popup.js"></script>
 </body>
 

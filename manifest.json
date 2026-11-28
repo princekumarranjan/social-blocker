@@ -1,13 +1,36 @@
 {
   "manifest_version": 3,
   "name": "Wapas",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Counts your reels and screen time, then covers the screen with a meme when you cross your limit.",
-  "permissions": ["storage"],
-  "action": { "default_popup": "popup.html", "default_title": "Wapas" },
-  "content_scripts": [{
-    "matches": ["*://*.instagram.com/*", "*://*.youtube.com/*", "*://*.snapchat.com/*", "*://*.facebook.com/*"],
-    "js": ["content.js"],
-    "run_at": "document_idle"
-  }]
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Wapas"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.instagram.com/*",
+        "*://*.youtube.com/*",
+        "*://*.snapchat.com/*",
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyyUh3c1p3hJntNlIh+nNbAekoDC8pjNoTTQVXkr/OEWbUhWfslyy4uzGWnX03wuStCRO2cAJOAz3AwB0e9LxjOMweGb6jceQxW6zui1sP5Wi/hfdS5gb+rTF5STpnekBGn8orAgzCZ/wS019XYANhWiTgPFQTvA6aCYWJbcida0ZhSsn29gmX/E7in0nJfUtwnJvLpgeXK0Imet6cYJhkWy7H7W1gUBEcxDpzpZhoHo+lDKSaCYfuT/BoO6e7Rm8eXOv08Pu4qasssOi+1U0R/NaIC4Lt2IBnGVXqXI9ZFlJ10Cbytd5vppzKK1tLrfxn7P1d03uoTwrKGjYH2RCFQIDAQAB",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://social-blocker.vercel.app/*"
+    ]
+  }
 }

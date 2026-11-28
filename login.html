@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Log in — Wapas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#10122e;--blue:#2331ff;--sun:#ffd23f;--paper:#fff9ea;--mute:#51557f}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font:16px/1.5 'Instrument Sans',sans-serif;display:grid;place-items:center;padding:24px}.card{width:min(460px,100%);background:#fff;border:2px solid var(--ink);border-radius:26px;padding:32px;box-shadow:7px 7px 0 var(--ink)}h1{font:800 2.5rem/1 'Syne',sans-serif;letter-spacing:-.04em;margin:0 0 10px}.muted{color:var(--mute);margin:0 0 24px}label{display:grid;gap:7px;font-weight:600;margin:16px 0}input{width:100%;padding:14px;border:2px solid var(--ink);border-radius:12px;font:inherit}button,.btn{display:inline-flex;justify-content:center;width:100%;border:2px solid var(--ink);border-radius:999px;padding:13px 18px;background:var(--sun);color:var(--ink);font:600 1rem 'Instrument Sans';cursor:pointer;text-decoration:none;box-shadow:3px 3px 0 var(--ink)}button:disabled{opacity:.6;cursor:wait}#status{min-height:24px;margin:16px 0 0;font-size:.95rem}a{color:var(--blue)}.links{display:grid;gap:12px;text-align:center;margin-top:22px}.brand{font:800 1.2rem 'Syne';margin-bottom:28px;display:block;color:var(--blue);text-decoration:none}
+</style>
+</head>
+<body><main class="card"><a class="brand" href="index.html">Wapas ↗</a><h1>Welcome back.</h1><p class="muted">Log in to connect your Wapas browser extension.</p>
+<form id="login"><label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label><label>Password<input name="password" type="password" autocomplete="current-password" required></label><button id="submit" type="submit">Log in</button></form>
+<p id="status" role="status" aria-live="polite"></p><div class="links"><a href="#" id="forgot">Forgot password?</a><a href="index.html#join">New to Wapas? Create an account</a><a href="index.html">Back to website</a></div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="https://cbfgrvagzlxekszhjkrg.supabase.co";
+const SUPABASE_KEY="sb_publishable_PzGfAciP0L_8ghOojEKpdg_Y_2TAvv1";
+const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const status=document.getElementById('status');
+const next=new URLSearchParams(location.search).get('next');
+const destination=next==='connect.html'?'connect.html':'connect.html';
+document.getElementById('login').addEventListener('submit',async e=>{e.preventDefault();const form=e.currentTarget;const button=document.getElementById('submit');button.disabled=true;status.textContent='Signing in…';
+ const {error}=await client.auth.signInWithPassword({email:form.email.value.trim(),password:form.password.value});
+ if(error){status.textContent=error.message;button.disabled=false;return;}
+ location.href=destination;
+});
+document.getElementById('forgot').addEventListener('click',async e=>{e.preventDefault();const email=document.querySelector('[name=email]').value.trim();if(!email){status.textContent='Enter your email first.';return;}const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:location.origin+'/login.html'});status.textContent=error?error.message:'If that account exists, a password reset email has been sent.';});
+client.auth.getSession().then(({data})=>{if(data.session)location.href=destination;});
+</script></body></html>

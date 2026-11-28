@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Connect extension — Wapas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#10122e;--blue:#2331ff;--sun:#ffd23f;--paper:#fff9ea;--mute:#51557f}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font:16px/1.5 'Instrument Sans',sans-serif;display:grid;place-items:center;padding:24px}.card{width:min(520px,100%);background:#fff;border:2px solid var(--ink);border-radius:26px;padding:32px;box-shadow:7px 7px 0 var(--ink)}h1{font:800 2.25rem/1 'Syne',sans-serif;letter-spacing:-.04em;margin:0 0 12px}.muted{color:var(--mute)}.code{font:800 clamp(1.1rem,5vw,1.7rem)/1.3 ui-monospace,monospace;letter-spacing:.07em;word-break:break-all;background:var(--sun);border:2px dashed var(--ink);border-radius:14px;padding:18px;margin:20px 0}.btn,button{display:inline-flex;justify-content:center;width:100%;border:2px solid var(--ink);border-radius:999px;padding:13px 18px;background:var(--sun);color:var(--ink);font:600 1rem 'Instrument Sans';cursor:pointer;text-decoration:none;box-shadow:3px 3px 0 var(--ink)}.secondary{background:#fff;margin-top:12px}#status{min-height:24px;margin-top:18px}.brand{font:800 1.2rem 'Syne';display:block;margin-bottom:28px;color:var(--blue);text-decoration:none}.small{font-size:.9rem;color:var(--mute);margin-top:18px} [hidden]{display:none!important}
+</style></head><body><main class="card"><a class="brand" href="index.html">Wapas ↗</a><h1>Connect your extension.</h1><p class="muted">Your account is ready. Pair this browser extension with your Wapas account.</p><div id="waiting">Checking your login…</div><section id="pair" hidden><p>Wapas is trying to connect automatically. If that does not happen, enter this one-time code in the extension popup. It expires in five minutes.</p><div class="code" id="pairCode"></div><button id="copy">Copy connection code</button><p id="status" role="status" aria-live="polite">Waiting for the extension…</p></section><p id="error" role="status" aria-live="polite"></p><p class="small"><a href="login.html?next=connect.html">Use another account</a> · <a href="index.html">Back to Wapas</a></p></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="https://cbfgrvagzlxekszhjkrg.supabase.co";
+const SUPABASE_KEY="sb_publishable_PzGfAciP0L_8ghOojEKpdg_Y_2TAvv1";
+const EXTENSION_ID="gfnelfegafomajdliklofplpfpgpamoj";
+const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const waiting=document.getElementById('waiting'),pair=document.getElementById('pair'),status=document.getElementById('status'),errorBox=document.getElementById('error');
+let currentCode='';
+async function start(){
+ const {data,error}=await client.auth.getSession();
+ if(error||!data.session){location.href='login.html?next=connect.html';return;}
+ const {data:code,error:rpcError}=await client.rpc('create_extension_pair_code');
+ if(rpcError){waiting.hidden=true;errorBox.textContent='Could not create a connection code. Please run extension-auth.sql in your Supabase SQL Editor, then refresh this page. ('+rpcError.message+')';return;}
+ currentCode=code;document.getElementById('pairCode').textContent=code;waiting.hidden=true;pair.hidden=false;
+ try{
+   if(!globalThis.chrome?.runtime?.sendMessage)throw new Error('Extension messaging is unavailable in this browser tab.');
+   chrome.runtime.sendMessage(EXTENSION_ID,{type:'WAPAS_PAIR',code},response=>{
+     const lastError=chrome.runtime.lastError;
+     if(lastError){status.textContent='Automatic connection was unavailable. Enter the code in the extension popup.';return;}
+     if(response?.ok){status.textContent='Connected! You can close this tab and use Wapas.';document.getElementById('pairCode').textContent='Connected ✓';}
+     else status.textContent=response?.error||'Enter the code in the extension popup to finish connecting.';
+   });
+ }catch(_){status.textContent='Enter this one-time code in the extension popup to finish connecting.';}
+}
+document.getElementById('copy').onclick=async()=>{try{await navigator.clipboard.writeText(currentCode);status.textContent='Code copied. Paste it into the Wapas extension popup.';}catch(_){status.textContent='Select and copy the code, then paste it into the extension popup.';}};
+start();
+</script></body></html>

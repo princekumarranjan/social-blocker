@@ -1,4 +1,4 @@
-(() => {
+(async () => {
   const H = location.hostname;
   const PLAT = /instagram\.com$/.test(H) ? "instagram" : /youtube\.com$/.test(H) ? "youtube" : /snapchat\.com$/.test(H) ? "snapchat" : "other";
   const RX = /\/(?:reels?|shorts)\/([\w-]{5,})/;   // /reels/ID, /reel/ID, /shorts/ID
@@ -6,6 +6,25 @@
     ["Beta, scroll baad mein.", "Your work won’t finish itself."], ["Wapas aaja.", "You were in the middle of something."]];
   const DEF = { reelLimit: 10, minutes: { instagram: 45, youtube: 45, snapchat: 20, other: 20 }, task: "" };
   const today = () => new Date().toISOString().slice(0, 10);
+  const SUPABASE_URL = "https://cbfgrvagzlxekszhjkrg.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_PzGfAciP0L_8ghOojEKpdg_Y_2TAvv1";
+  const storedAuth = await chrome.storage.local.get("wapasAuth");
+  if (!storedAuth.wapasAuth?.sessionToken) return;
+  let authValid = false;
+  try {
+    const check = await fetch(`${SUPABASE_URL}/rest/v1/rpc/validate_extension_session`, {
+      method: "POST", headers: { "Content-Type": "application/json", apikey: SUPABASE_KEY },
+      body: JSON.stringify({ p_token: storedAuth.wapasAuth.sessionToken })
+    });
+    const result = await check.json(); authValid = !!(check.ok && result.valid);
+  } catch (_) { return; }
+  if (!authValid) { await chrome.storage.local.remove("wapasAuth"); return; }
+  let active = true;
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === "local" && changes.wapasAuth && !changes.wapasAuth.newValue) {
+      active = false; document.getElementById("wapas-host")?.remove();
+    }
+  });
   let lastId = null, busy = false;
 
   async function update(fn) {
@@ -38,6 +57,7 @@
   }
 
   async function check() {                       // count a reel each time the reel ID in the URL changes
+    if (!active) return;
     const m = location.pathname.match(RX), id = m && m[1];
     if (!id || id === lastId) return;
     lastId = id;
@@ -50,7 +70,7 @@
   setInterval(check, 700);
 
   setInterval(async () => {                      // count minutes while this tab is visible and focused
-    if (document.visibilityState !== "visible" || !document.hasFocus()) return;
+    if (!active || document.visibilityState !== "visible" || !document.hasFocus()) return;
     const hit = await update((st, s) => {
       st.secs[PLAT] = (st.secs[PLAT] || 0) + 5;
       const lim = s.minutes[PLAT];

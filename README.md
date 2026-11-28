@@ -35,3 +35,14 @@ The extension tracks supported website activity in a desktop browser. It does no
 
 ## Important
 AdSense approval is decided by Google. These changes address content and site-structure gaps visible in the supplied source, but cannot guarantee approval. Replace the contact-page notice with a real contact channel and verify all policy statements against the live implementation before publishing.
+
+
+## Wapas account authentication (new)
+1. In Supabase, open SQL Editor and run `extension-auth.sql` once. This creates the one-time pairing-code and extension-session RPC functions.
+2. Deploy the updated static website files (`index.html`, `login.html`, `connect.html`, and existing supporting pages) to the same Vercel project.
+3. In Supabase Authentication settings, configure the site URL as `https://social-blocker.vercel.app` and add `https://social-blocker.vercel.app/**` to allowed redirect URLs if you use password recovery.
+4. In Microsoft Edge, open `edge://extensions`, remove the old unpacked Wapas copy if needed, then choose **Load unpacked** and select this project folder. For a store-published extension, submit the updated package through the store's update process.
+5. On first install, Wapas opens the website. Create an account using the existing early-access form (or log in if you already registered), then connect. The website attempts automatic pairing; if browser messaging is unavailable, copy the five-minute code into the extension popup.
+6. The extension validates its opaque session with Supabase. Logging out from the extension revokes that session.
+
+The public Supabase publishable key is intentionally present in browser code. Never add a Supabase `service_role` key to this project. The extension's `key` manifest property is based on the public key supplied for the published extension; verify that it matches the actual Edge listing before publishing an update.
